@@ -1,0 +1,5 @@
+DATE :
+(JOUR - MOIS)
+26 - 5
+COMMANDE :
+(PLAT - QUANTITE)
