@@ -3,7 +3,7 @@
 
 This scripti is restaurant management program. Thank's to this you can manage your stock, the prices of your items, take commandes from your customers and chek your restaurant statistics.
 
-# How to use :
+### How to use :
 * Download the file thank's to the github page. Or clone the project with the git link :
 ```shell
 git clone https://github.com/Ezotose-1/Restaurant.git
@@ -14,7 +14,7 @@ git clone https://github.com/Ezotose-1/Restaurant.git
 python main.py
 ```
 
-# File architecture
+### File architecture
 ```
 Restaurant
 └─ main.py
@@ -27,7 +27,7 @@ Restaurant
    └─ ... (your orders files)
 ```
    
-License
+### License
 ----
 Developped by Pierre B.
 Languages : Python
