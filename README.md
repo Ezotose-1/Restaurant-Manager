@@ -26,6 +26,22 @@ Restaurant
    └─ MAUPASSANT.txt
    └─ ... (your orders files)
 ```
+
+### Library
+For the use of this content, there is no library needed. All the lib used are the original from Python : 
+```python
+import os
+from os import system, name
+import datetime
+import sys
+```
+
+
+### Compatibility
+To use this content, you must use Python **2.X or higher** *(3.X included)*.
+The program have been made with Python *V3.6.9*, it have been tested with lower version.
+All the script is Windows and Linux compatible.
+
    
 ### License
 ----
