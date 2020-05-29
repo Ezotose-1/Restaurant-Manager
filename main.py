@@ -11,6 +11,7 @@ import sys
 
 ## Functions ##
 
+
 # Cette fonction permet de lire une chaine de caracteres independamment de la version de Python.
 def __input(prompt=""):
     if (sys.version_info[0] == 3):
@@ -77,7 +78,7 @@ def _listToMenu(path, L):
 
 
 
-## FIRST MENU ## 
+## --------------- MAIN - MENU ---------------##
 def _firstMenu():
     _ = system("clear")
     _headerMain(["RESTAURANT LIPSUM", "15 rue des Ecoles", "08360 GIVET"])
@@ -106,7 +107,7 @@ def _firstMenu():
         print(entry + " n'est pas une entree valable (1-5)")
 
 
-## STOCK MENU ##
+## --------------- STOCK - MENU ---------------##
 def _stockOptions(path, s):
     print("\n 1. MISE A JOUR DU STOCK               2. AJOUT DE PRODUITS")
     print(" 3. EXPORTER LA LISTE DES PRODUITS     4. SUPPRIMER UN PRODUITS")
@@ -114,6 +115,7 @@ def _stockOptions(path, s):
     print("QUE VOULEZ VOUS FAIRE ? (1-5)")
     entry = __input()
     _ = system("clear")
+    _headerMain(["RESTAURANT LIPSUM", "GESTIONS DES STOCKS"])
     if (entry == '1'):
         pass
     elif (entry == '2'):
@@ -131,52 +133,21 @@ def _stockOptions(path, s):
         file.write(s)
         file.close()
     elif (entry == '4'):
-        print("QUE VOULEZ VOUS SUPPRIMER ?")
-        print("(ex : ''POMME'' )")
-        items = __input()
+        print(_stockTable())
+        print("QUEL PRODUIT VOULEZ VOUS SUPPRIMER ?")
+        itemIndx = int(__input())
         print("COMBIEN VOULEZ VOUS EN SUPPRIMER ?")
         count = int(__input())
-        _stockRemove(path, items, int(count))
+        _stockRemove(path, itemIndx, int(count))
     elif (entry == '5'):
         _firstMenu()
         return True
     else:
         print(entry + " n'est pas une entree valable (1-5)")
     _stockMenu()
-                 
-def _stockAdd(path, element, count):
-    L = _storageToList(path)
-    isPresent = False
-    for i in range (len(L)):
-        if (L[i][0] == element):
-            isPresent= True
-            L[i] = (L[i][0], str(int(L[i][1]) + count))
-    if (not isPresent):
-        L.append((element, str(count)))
-    _listToStorage(path, L)
 
 
-
-def _stockRemove(path, element, count):
-    L = _storageToList(path)
-    listEl = None
-    for i in range (len(L)):
-        if (L[i][0] == element):
-            listEl = L[i]
-            if (int(L[i][1]) <= count):
-                L.remove(listEl)
-                _listToStorage(path, L)
-                return True
-            else:
-                L[i] = (L[i][0], str(int(L[i][1])-count))
-    if (listEl == None):
-        print("Element not in the storage")
-    else:
-        _listToStorage(path, L)
-
-def _stockMenu():
-    _ = system("clear")
-    _headerMain(["RESTAURANT LIPSUM", "GESTIONS DES STOCKS"])
+def _stockTable():
     path = os.path.abspath("restaurant.py")
     path = os.path.split(path)[0]+"/stocks.txt"
     file = open(path, "r")
@@ -194,35 +165,54 @@ def _stockMenu():
             strTable += " "
         strTable += "|\n"
     strTable += "---------------------------------------------------\n"
+    return strTable
+
+
+def _stockAdd(path, element, count):    
+    L = _storageToList(path)
+    isPresent = False
+    for i in range (len(L)):
+        if (L[i][0] == element):
+            isPresent= True
+            L[i] = (L[i][0], str(int(L[i][1]) + count))
+    if (not isPresent):
+        L.append((element, str(count)))
+    _listToStorage(path, L)
+
+
+
+def _stockRemove(path, index, count):
+    L = _storageToList(path)
+    if(index < len(L)):
+        listEl = L[index]
+        if (int(L[index][1]) <= count):
+            L.remove(listEl)
+            _listToStorage(path, L)
+            return True
+        else:
+            L[index] = (L[index][0], str(int(L[index][1])-count))
+    _listToStorage(path, L)
+
+
+def _stockMenu():
+    _ = system("clear")
+    _headerMain(["RESTAURANT LIPSUM", "GESTIONS DES STOCKS"])
+    strTable = _stockTable()
+    path = os.path.abspath("restaurant.py")
+    path = os.path.split(path)[0]+"/stocks.txt"
     print(strTable)
     _stockOptions(path, strTable)
 
 
 
 
-## MENU MENU ##
+## --------------- MENU - MENU ---------------##
 def _menuMenu():
     _ = system("clear")
     _headerMain(["RESTAURANT LIPSUM", "GESTIONS DU MENU"])
     path = os.path.abspath("restaurant.py")
     path = os.path.split(path)[0]+"/menu.txt"
-    menuTxt = _menuToList(path)
-    strTable = "\n\n---------------------------------------------------------\n"
-    strTable +="| PLAT                       | CATEGORIE         | PRIX |\n"
-    strTable += "---------------------------------------------------------\n"
-    for i in menuTxt:
-        plat, categorie, prix = i[0], i[1], i[2].strip("\n")
-        strTable +="| "+ plat
-        for j in range (0, 27- len(plat)):
-            strTable += " "
-        strTable +="| "+ categorie
-        for k in range (0, 18- len(categorie)):
-            strTable += " "
-        strTable +="| "+ prix
-        for k in range (0, 5- len(prix)):
-            strTable += " "
-        strTable += "|\n"
-    strTable += "---------------------------------------------------------\n"
+    strTable = _menuTable()
     print(strTable)
     _menuOption(path)
 
@@ -233,6 +223,7 @@ def _menuOption(path):
     print("QUE VOULEZ VOUS FAIRE ? (1-4)")
     entry = __input()
     _ = system("clear")
+    _headerMain(["RESTAURANT LIPSUM", "GESTIONS DU MENU"])
     if (entry == '1'):
         print("QUEL PLAT VOULEZ VOUS MODIFIER ?")
         print("(ex : ''TARTE AUX POMMES'' )")
@@ -245,17 +236,17 @@ def _menuOption(path):
         print("(ex : ''TARTE AUX POMMES'' )")
         plat = __input()
         print("DE QUEL CATEGORIE EST CE PLAT ?")
-        print("(ex : ''DESSERT'' )")
+        print("(ex : 'DESSERT' / 'ENTREE' / 'PLAT PRINCIPAL' / 'BOISSON' )")
         categorie = __input()
         print("QUEL EST SON PRIX ?")
         prix = int(__input())
         _menuAdd(path, plat, categorie, prix)
     elif (entry == '3'):
-        print("QUEL PLAT SUPPRIMER ?")
-        print("(ex : ''TARTE AUX POMMES'' )")
-        plat = __input()
-        print("COMBIEN VOULEZ VOUS EN SUPPRIMER ?")
-        _menuRemove(path, plat)
+        print(_menuTable())
+        print("QUEL PLAT VOULEZ VOUS SUPPRIMER ?")
+        print("(Mettre son index)")
+        platIndx = int(__input())
+        _menuRemove(path, platIndx)
     elif (entry == '4'):
         _firstMenu()
         return True
@@ -263,6 +254,30 @@ def _menuOption(path):
         print(entry + " n'est pas une entree valable (1-5)")
     _menuMenu()
 
+def _menuTable():
+    path = os.path.abspath("restaurant.py")
+    path = os.path.split(path)[0]+"/menu.txt"
+    menuTxt = _menuToList(path)
+    strTable = "\n------------------------------------------------------------\n"
+    strTable +="|   | PLAT                       | CATEGORIE         | PRIX |\n"
+    strTable += "------------------------------------------------------------\n"
+    index = -1
+    for i in menuTxt:
+        index, plat, categorie, prix = index+1, i[0], i[1], i[2].strip("\n")
+        strTable +="| "+ str(index)
+        strTable += " " * (2 - len(str(index)))
+        strTable +="| "+ plat
+        for j in range (0, 27- len(plat)):
+            strTable += " "
+        strTable +="| "+ categorie
+        for k in range (0, 18- len(categorie)):
+            strTable += " "
+        strTable +="| "+ prix
+        for k in range (0, 5- len(prix)):
+            strTable += " "
+        strTable += "|\n"
+    strTable += "-------------------------------------------------------------\n"
+    return strTable
 
 def _menuAdd(path, element, categorie, prix):
     L = _menuToList(path)
@@ -275,15 +290,29 @@ def _menuAdd(path, element, categorie, prix):
     _listToMenu(path, L)
 
 
-def _menuRemove(path, plat):
+def _menuRemove(path, index):
     L = _menuToList(path)
-    listEl = None
-    for i in range (len(L)):
-        if (L[i][0] == plat):
-            listEl = L[i]
+    if (index < len(L)):
+        L.remove(L[index])
+    _listToMenu(path, L)
+
+
+def _stockRemove(path, index, count):
+    L = _storageToList(path)
+    if(index < len(L)):
+        listEl = L[index]
+        if (int(L[index][1]) <= count):
             L.remove(listEl)
-    if (listEl != None):
-        _listToMenu(path, L)
+            _listToStorage(path, L)
+            return True
+        else:
+            L[index] = (L[index][0], str(int(L[index][1])-count))
+    _listToStorage(path, L)
+
+
+
+
+
 
 
 def _menuModify(path, element, newprice):
@@ -294,8 +323,7 @@ def _menuModify(path, element, newprice):
     _listToMenu(path, L)
 
 
-## Menu Commande ##
-
+## --------------- ORDER - MENU ---------------##
 def _orderList():
     path = os.path.abspath("main.py")
     path = os.path.split(path)[0]+"/menu.txt"
@@ -361,6 +389,7 @@ def _orderOption(path, L):
     print("QUE VOULEZ VOUS FAIRE ? (1-4)")
     entry = __input()
     _ = system("clear")
+    _headerMain(["RESTAURANT LIPSUM", "PRISE DE COMMANDE"])
     _orderList()
     if (entry == '1'):
         print("QUEL PLAT VOULEZ VOUS SELECTIONNER ?")
@@ -376,7 +405,7 @@ def _orderOption(path, L):
         _orderResume(path)
         _orderOption(path, L)
     elif (entry  == '3'):
-        pass
+        _firstMenu()
     elif (entry == '4'):
         _firstMenu()
 
@@ -408,8 +437,7 @@ def _orderResume(path):
     print(s)
 
 
-## Menu Historique ##
-
+## --------------- HISTORIQUE - MENU ---------------##
 def _histoMenu():
     _ = system("clear")
     _headerMain(["RESTAURANT LIPSUM", "HISTORIQUE DES COMMANDES"])
@@ -441,6 +469,7 @@ def _histoOption(s):
     entry = __input()
     if (entry == '1'):
         print("OU VOULEZ VOUS L'EXPORTER ?")
+        print("(ex : "+os.path.split(os.path.abspath("main.py"))[0] + "/historique.txt )")
         path = __input()
         file = open(path, "wr+")
         file.write(s)
