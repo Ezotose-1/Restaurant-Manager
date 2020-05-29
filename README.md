@@ -14,7 +14,7 @@ git clone https://github.com/Ezotose-1/Restaurant.git
 python main.py
 ```
 
-# Tree
+# File architecture
 ```
 Restaurant
 └─ main.py
