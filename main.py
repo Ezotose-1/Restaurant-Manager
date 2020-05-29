@@ -225,12 +225,13 @@ def _menuOption(path):
     _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "GESTIONS DU MENU"])
     if (entry == '1'):
+        print(_menuTable())
         print("QUEL PLAT VOULEZ VOUS MODIFIER ?")
-        print("(ex : ''TARTE AUX POMMES'' )")
-        plat = __input()
+        print("(Mettre son index )")
+        platIndex = int(__input())
         print("QUEL EST SON NOUVEAU PRIX ?")
         newprice = int(__input())
-        _menuModify(path, plat, newprice)
+        _menuModify(path, platIndex, newprice)
     elif (entry == '2'):
         print("QUEL PLAT VOULEZ VOUS AJOUTER ?")
         print("(ex : ''TARTE AUX POMMES'' )")
@@ -297,29 +298,10 @@ def _menuRemove(path, index):
     _listToMenu(path, L)
 
 
-def _stockRemove(path, index, count):
-    L = _storageToList(path)
-    if(index < len(L)):
-        listEl = L[index]
-        if (int(L[index][1]) <= count):
-            L.remove(listEl)
-            _listToStorage(path, L)
-            return True
-        else:
-            L[index] = (L[index][0], str(int(L[index][1])-count))
-    _listToStorage(path, L)
-
-
-
-
-
-
-
-def _menuModify(path, element, newprice):
+def _menuModify(path, index, newprice):
     L = _menuToList(path)
-    for i in range (len(L)):
-        if (L[i][0] == element):
-            L[i] = (L[i][0], L[i][1], str(newprice))
+    if (index < len(L)):
+        L[index] = (L[index][0], L[index][1], str(newprice))
     _listToMenu(path, L)
 
 
