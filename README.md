@@ -45,13 +45,10 @@ All the script is Windows and Linux compatible.
    
 ### License
 ----
-Developped by Pierre B.
-
-Languages : Python
-
-Free to use
-
-MIT
+Developped by Pierre B.  
+Languages : Python  
+Free to use  
+MIT  
 
 
 **Free Software**
