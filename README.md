@@ -23,6 +23,7 @@ These type of menuing is used :
 What do you wan't to do : (1-4)
 > 
 ```
+Just enter the number of the option you wan't to use.
 
 
 ### File architecture
