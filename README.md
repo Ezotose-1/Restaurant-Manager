@@ -15,8 +15,8 @@ python main.py
 ```
 
 # Tree
+```shell
 └─ main.py
-
 └─ stocks.txt
 └─ menu.txt
 └─ orders
@@ -24,6 +24,8 @@ python main.py
    └─ *EPICURE.txt*
    └─ *MAUPASSANT.txt*
    └─ ... (your orders files)
+```
+   
 License
 ----
 Developped by Pierre B.
