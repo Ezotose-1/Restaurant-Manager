@@ -80,7 +80,7 @@ def _listToMenu(path, L):
 
 ## --------------- MAIN - MENU ---------------##
 def _firstMenu():
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "15 rue des Ecoles", "08360 GIVET"])
     print("MENU PRINCIPALE :\n")
     print("1. PRISE DE COMMANDE")
@@ -90,7 +90,7 @@ def _firstMenu():
     print("5. QUITTER\n")
     print("QUE VOULEZ VOUS FAIRE ? (1-5) :")
     entry = __input()
-    _ = system("clear")
+    _ = system("clear||cls")
     if (entry == '1'):
         (path, L) = _orderMenu()
         _orderOption(path, L)
@@ -114,7 +114,7 @@ def _stockOptions(path, s):
     print(" 5. RETOUR AU MENU PRINCIPAL")
     print("QUE VOULEZ VOUS FAIRE ? (1-5)")
     entry = __input()
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "GESTIONS DES STOCKS"])
     if (entry == '1'):
         pass
@@ -195,7 +195,7 @@ def _stockRemove(path, index, count):
 
 
 def _stockMenu():
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "GESTIONS DES STOCKS"])
     strTable = _stockTable()
     path = os.path.abspath("restaurant.py")
@@ -208,7 +208,7 @@ def _stockMenu():
 
 ## --------------- MENU - MENU ---------------##
 def _menuMenu():
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "GESTIONS DU MENU"])
     path = os.path.abspath("restaurant.py")
     path = os.path.split(path)[0]+"/menu.txt"
@@ -222,7 +222,7 @@ def _menuOption(path):
     print(" 3. SUPPRIMER UN PLAT                4. RETOUR AU MENU PRINCIPAL")
     print("QUE VOULEZ VOUS FAIRE ? (1-4)")
     entry = __input()
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "GESTIONS DU MENU"])
     if (entry == '1'):
         print("QUEL PLAT VOULEZ VOUS MODIFIER ?")
@@ -364,7 +364,7 @@ def _orderList():
 
 
 def _orderMenu():
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "PRISE DE COMMANDE"])
     client = __input("NOM DU CLIENT : ")
     plat = _orderList()
@@ -388,7 +388,7 @@ def _orderOption(path, L):
     print(" 3. ENVOI DE LA COMMANDE A LA CUISINE   4. RETOUR AU MENU PRINCIPAL")
     print("QUE VOULEZ VOUS FAIRE ? (1-4)")
     entry = __input()
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "PRISE DE COMMANDE"])
     _orderList()
     if (entry == '1'):
@@ -398,7 +398,7 @@ def _orderOption(path, L):
         count = int(__input())
         plat = L[i][0]
         _orderAdd(path, plat, count)
-        _ = system("clear")
+        _ = system("clear||cls")
         _orderList()
         _orderOption(path, L)
     elif (entry == '2'):
@@ -439,7 +439,7 @@ def _orderResume(path):
 
 ## --------------- HISTORIQUE - MENU ---------------##
 def _histoMenu():
-    _ = system("clear")
+    _ = system("clear||cls")
     _headerMain(["RESTAURANT LIPSUM", "HISTORIQUE DES COMMANDES"])
     orderL = os.listdir("orders")
     totalOrder, weekOrder, lastOrder = len(orderL), 0, datetime.date(2000, 1, 1)
