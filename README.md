@@ -14,6 +14,15 @@ git clone https://github.com/Ezotose-1/Restaurant.git
 python main.py
 ```
 
+# Tree
+└─ main.py
+└─ stocks.txt
+└─ menu.txt
+└─ orders
+   └─ *DUBELLAY.txt*
+   └─ *EPICURE.txt*
+   └─ *MAUPASSANT.txt*
+   └─ ... (your orders files)
 License
 ----
 Developped by Pierre B.
