@@ -6,8 +6,17 @@ __author__ = 'PRENOM.NOM'
 import os
 from os import system, name
 import datetime
+import sys
+
 
 ## Functions ##
+
+# Cette fonction permet de lire une chaine de caracteres independamment de la version de Python.
+def __input(prompt=""):
+    if (sys.version_info[0] == 3):
+        return input(prompt)
+    else:
+        return raw_input(prompt)
 
 
 # Cette fonction prend en entree une liste de string qui formeront le HEADER de chaque menu #
@@ -79,7 +88,7 @@ def _firstMenu():
     print("4. HISTORIQUE DES COMMANDES")
     print("5. QUITTER\n")
     print("QUE VOULEZ VOUS FAIRE ? (1-5) :")
-    entry = str(input())
+    entry = __input()
     _ = system("clear")
     if (entry == '1'):
         (path, L) = _orderMenu()
@@ -103,30 +112,30 @@ def _stockOptions(path, s):
     print(" 3. EXPORTER LA LISTE DES PRODUITS     4. SUPPRIMER UN PRODUITS")
     print(" 5. RETOUR AU MENU PRINCIPAL")
     print("QUE VOULEZ VOUS FAIRE ? (1-5)")
-    entry = str(input())
+    entry = __input()
     _ = system("clear")
     if (entry == '1'):
         pass
     elif (entry == '2'):
         print("QUE VOULEZ VOUS AJOUTER ?")
         print("(ex : ''POMME'' )")
-        items = input()
+        items = __input()
         print("COMBIEN VOULEZ VOUS EN AJOUTER ?")
-        count = input()
+        count = int(__input())
         _stockAdd(path, items, count)
     elif (entry == '3'):
         print("OU VOULEZ VOUS EXPORTER ?")
         print("(ex : "+path.strip("stocks.txt")+"votrestock.txt )")
-        exportPth = input()
+        exportPth = __input()
         file = open(exportPth, "wr+")
         file.write(s)
         file.close()
     elif (entry == '4'):
         print("QUE VOULEZ VOUS SUPPRIMER ?")
         print("(ex : ''POMME'' )")
-        items = input()
+        items = __input()
         print("COMBIEN VOULEZ VOUS EN SUPPRIMER ?")
-        count = input()
+        count = int(__input())
         _stockRemove(path, items, int(count))
     elif (entry == '5'):
         _firstMenu()
@@ -222,29 +231,29 @@ def _menuOption(path):
     print("\n 1. MODIFIER UN PLAT                 2. AJOUTER UN PLAT")
     print(" 3. SUPPRIMER UN PLAT                4. RETOUR AU MENU PRINCIPAL")
     print("QUE VOULEZ VOUS FAIRE ? (1-4)")
-    entry = str(input())
+    entry = __input()
     _ = system("clear")
     if (entry == '1'):
         print("QUEL PLAT VOULEZ VOUS MODIFIER ?")
         print("(ex : ''TARTE AUX POMMES'' )")
-        plat = input()
+        plat = __input()
         print("QUEL EST SON NOUVEAU PRIX ?")
-        newprice = input()
+        newprice = int(__input())
         _menuModify(path, plat, newprice)
     elif (entry == '2'):
         print("QUEL PLAT VOULEZ VOUS AJOUTER ?")
         print("(ex : ''TARTE AUX POMMES'' )")
-        plat = input()
+        plat = __input()
         print("DE QUEL CATEGORIE EST CE PLAT ?")
         print("(ex : ''DESSERT'' )")
-        categorie = input()
+        categorie = __input()
         print("QUEL EST SON PRIX ?")
-        prix = input()
+        prix = int(__input())
         _menuAdd(path, plat, categorie, prix)
     elif (entry == '3'):
         print("QUEL PLAT SUPPRIMER ?")
         print("(ex : ''TARTE AUX POMMES'' )")
-        plat = input()
+        plat = __input()
         print("COMBIEN VOULEZ VOUS EN SUPPRIMER ?")
         _menuRemove(path, plat)
     elif (entry == '4'):
@@ -329,7 +338,7 @@ def _orderList():
 def _orderMenu():
     _ = system("clear")
     _headerMain(["RESTAURANT LIPSUM", "PRISE DE COMMANDE"])
-    client = input("NOM DU CLIENT : ")
+    client = __input("NOM DU CLIENT : ")
     plat = _orderList()
     path = os.path.abspath("main.py")
     path = os.path.split(path)[0]+"/orders/"+client+".txt"
@@ -350,14 +359,14 @@ def _orderOption(path, L):
     print(" 1. SELECTIONNER UN PRODUIT             2. RESUME DE LA COMMANDE")
     print(" 3. ENVOI DE LA COMMANDE A LA CUISINE   4. RETOUR AU MENU PRINCIPAL")
     print("QUE VOULEZ VOUS FAIRE ? (1-4)")
-    entry = str(input())
+    entry = __input()
     _ = system("clear")
     _orderList()
     if (entry == '1'):
         print("QUEL PLAT VOULEZ VOUS SELECTIONNER ?")
-        i = input()
+        i = int(__input())
         print("COMBIEN EN VOULEZ VOUS ?")
-        count = input()
+        count = int(__input())
         plat = L[i][0]
         _orderAdd(path, plat, count)
         _ = system("clear")
@@ -429,10 +438,10 @@ def _histoMenu():
 def _histoOption(s):
     print(" 1. EXPORTER LE RESUME                  2. RETOUR AU MENU PRINCIPAL")
     print("QUE VOULEZ VOUS FAIRE ? (1-2)")
-    entry = str(input())
+    entry = __input()
     if (entry == '1'):
         print("OU VOULEZ VOUS L'EXPORTER ?")
-        path = input()
+        path = __input()
         file = open(path, "wr+")
         file.write(s)
         file.close()
