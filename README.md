@@ -25,6 +25,17 @@ What do you wan't to do : (1-4)
 ```
 Just enter the number of the option you wan't to use.
 
+You can also manually modify the menu and the stock by editing the files *menu.txt* and *stocks.txt*.  
+**BUT** you need to follow the format :  
+For menu.txt
+```
+dish - dish type - price
+```
+
+For stocks.txt
+```
+dish - count
+```
 
 ### File architecture
 ```
