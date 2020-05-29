@@ -27,7 +27,7 @@ Restaurant
    └─ ... (your orders files)
 ```
 
-### Library
+### Libraries
 For the use of this content, there is no library needed. All the lib used are the original from Python : 
 ```python
 import os
@@ -46,8 +46,11 @@ All the script is Windows and Linux compatible.
 ### License
 ----
 Developped by Pierre B.
+
 Languages : Python
+
 Free to use
+
 MIT
 
 
