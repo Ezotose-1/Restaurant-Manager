@@ -16,6 +16,7 @@ python main.py
 
 # Tree
 └─ main.py
+
 └─ stocks.txt
 └─ menu.txt
 └─ orders
