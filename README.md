@@ -15,14 +15,14 @@ python main.py
 ```
 
 # Tree
-```shell
+```
 └─ main.py
 └─ stocks.txt
 └─ menu.txt
 └─ orders
-   └─ *DUBELLAY.txt*
-   └─ *EPICURE.txt*
-   └─ *MAUPASSANT.txt*
+   └─ DUBELLAY.txt
+   └─ EPICURE.txt
+   └─ MAUPASSANT.txt
    └─ ... (your orders files)
 ```
    
