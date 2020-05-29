@@ -16,6 +16,7 @@ python main.py
 
 # Tree
 ```
+Restaurant
 └─ main.py
 └─ stocks.txt
 └─ menu.txt
