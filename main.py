@@ -358,6 +358,8 @@ def _orderMenu():
     file = open(path, "a")
     file.write("(JOUR - MOIS)\n")
     file.write(str(datetime.datetime.now().day) + " - " + str(datetime.datetime.now().month) + "\n")
+    file.write("PRIX TOTAL :\n")
+    file.write("0\n")
     file.write("COMMANDE :\n")
     file.write("(PLAT - QUANTITE)\n")
     file.close()
@@ -379,7 +381,7 @@ def _orderOption(path, L):
         print("COMBIEN EN VOULEZ VOUS ?")
         count = int(__input())
         plat = L[i][0]
-        _orderAdd(path, plat, count)
+        _orderAdd(path, plat, count, int(L[i][2]))
         _ = system("clear||cls")
         _orderList()
         _orderOption(path, L)
@@ -392,9 +394,16 @@ def _orderOption(path, L):
         _firstMenu()
 
 
-def _orderAdd(path, plat, count):
+def _orderAdd(path, plat, count, price):
     file = open(path, "a")
     file.write(plat + " - " + str(count) + "\n")
+    file.close()
+    file = open(path, "r")
+    L = file.readlines()
+    file.close()
+    file = open(path, "w")
+    L[4] = str( int(L[4]) + (price * count) ) + "\n"
+    file.writelines(L)
     file.close()
 
 
@@ -402,7 +411,7 @@ def _orderAdd(path, plat, count):
 def _orderToTuples(L):
     (day, month) = ( L[2].split(" - ")[0], L[2].split(" - ")[1].strip("\n") )
     Plats = []
-    for i in range (5, len(L)):
+    for i in range (7, len(L)):
         Plats.append( ( L[i].split(" - ")[0], L[i].split(" - ")[1].strip("\n") ) )
     return (day, month, Plats)
     
@@ -411,10 +420,13 @@ def _orderToTuples(L):
 def _orderResume(path):
     file = open(path, "r")
     L = file.readlines()
-    (_, _, L) = _orderToTuples(L)
-    s = "ETAT DE LA COMMANDE :\n"
-    for i in L:
-        s += i[0] + " QUANTITE " + i[1] + "\n"
+    (_, _, OrdList) = _orderToTuples(L)
+    s = "----------------------------------------------------\n"
+    s += "   ETAT DE LA COMMANDE :\n"
+    for i in OrdList:
+        s += i[0] + " " * (27 - len(i[0])) + " QUANTITE " + i[1] + "\n"
+    s += "   PRIX TOTAL :\n"
+    s += L[4].strip("\n") + " EURO\n"
     file.close()
     print(s)
 
@@ -425,22 +437,27 @@ def _histoMenu():
     _headerMain(["RESTAURANT LIPSUM", "HISTORIQUE DES COMMANDES"])
     orderL = os.listdir("orders")
     totalOrder, weekOrder, lastOrder = len(orderL), 0, datetime.date(2000, 1, 1)
+    totalPrice, weekPrice = 0, 0
     s = "\nNOMBRE TOTAL DE COMMANDES PASSEES : " + str(totalOrder) + "\n"
     path = os.path.abspath("main.py")
     path = os.path.split(path)[0]+"/orders/"
     for i in orderL:
         Thispath = path + str(i)
         file = open(Thispath, "r")
-        L = file.readlines()
-        (d, m, L) = _orderToTuples(L)
+        Lst = file.readlines()
+        totalPrice += int(Lst[4].strip("\n"))
+        (d, m, L) = _orderToTuples(Lst)
         currentdate = datetime.date(datetime.datetime.now().year, datetime.datetime.now().month, datetime.datetime.now().day)
         date = datetime.date(2020, int(m), int(d))
         if (date > lastOrder):
             lastOrder = date
         if (currentdate - date) <= datetime.timedelta(7):
+            weekPrice += int(Lst[4].strip("\n"))
             weekOrder += 1
+    s += "TOTAL PAYE : " + str(totalPrice) + " euro\n"
     s += "\nDERNIERE COMMANDE : " + str(lastOrder.day) + "/" + str(lastOrder.month) + "\n"
     s += "\nCOMMANDE PASSEES CES 7 DERNIERS JOURS : " + str(weekOrder) + "\n"
+    s += "TOTAL PAYE CES 7 DERNIERS JOURS : " + str(weekPrice) + " euro\n" 
     print(s)
     return s
 
