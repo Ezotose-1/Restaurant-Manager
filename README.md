@@ -1,4 +1,4 @@
-# Restaurant
+# Restaurant Manager
 
 
 This scripti is restaurant management program. Thank's to this you can manage your stock, the prices of your items, take commandes from your customers and chek your restaurant statistics.
