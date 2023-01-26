@@ -1,17 +1,17 @@
 # Restaurant Manager
 
 
-This scripti is restaurant management program. Thank's to this you can manage your stock, the prices of your items, take commandes from your customers and chek your restaurant statistics.
+This script is restaurant management program. Thank's to this you can manage your stock, the prices of your items, take commandes from your customers and check your restaurant statistics.
 
 ### Installation
 * Download the file thank's to the github page. Or clone the project with the git link :
 ```shell
-git clone https://github.com/Ezotose-1/Restaurant.git
+ $ git clone https://github.com/Ezotose-1/Restaurant.git
 ```
 
 * Run the script by using the python command :
 ```shell
-python src/app.py
+ $ python src/app.py
 ```
 
 ### Libraries 
