@@ -1,0 +1,38 @@
+{
+    "SAUTE DE BOEUF CAROTTES": {
+        "Category": "PLAT PRINCIPAL",
+        "Prix": 8
+    },
+    "TERRINE DE CAMPAGNE": {
+        "Category": "PLAT PRINCIPAL",
+        "Prix": 6
+    },
+    "QUICHE DE LORRAINE": {
+        "Category": "PLAT PRINCIPAL",
+        "Prix": 5
+    },
+    "GLACE": {
+        "Category": "DESSERT",
+        "Prix": 3
+    },
+    "COCA COLA": {
+        "Category": "BOISSON",
+        "Prix": 2
+    },
+    "BIERE": {
+        "Category": "BOISSON",
+        "Prix": 7
+    },
+    "STEAK HACHE": {
+        "Category": "PLAT PRINCIPAL",
+        "Prix": 6
+    },
+    "TARTE AUX POMMES": {
+        "Category": "DESSERT",
+        "Prix": 4
+    },
+    "SALADE": {
+        "Category": "ENTREE",
+        "Prix": 4
+    }
+}
